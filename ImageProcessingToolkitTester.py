@@ -23,19 +23,30 @@ from ImageProcessingToolkit import *
 
 template("arrow.gif")
 template("jellyfish.gif")
+template("totoro.gif")
 
 # 1
 border("arrow.gif", "#FFFF00", 5)
 border("jellyfish.gif", "#FFFF00", 5)
+border("totoro.gif", "#FF00FF", 5)
 # 2
 half("arrow.gif")
 half("jellyfish.gif")
+half("totoro.gif")
 # 3
 double("arrow.gif")
 double("jellyfish.gif")
+double("totoro.gif")
 # 4
 sideClone("arrow.gif")
 sideClone("jellyfish.gif")
+sideClone("totoro.gif")
 # 5
 greyscale("arrow.gif")
 greyscale("jellyfish.gif")
+greyscale("totoro.gif")
+# 7
+scale_factor = float(input("SCALE FACTOR:"))
+scale("arrow.gif", scale_factor)
+scale("jellyfish.gif", scale_factor)
+scale("totoro.gif", scale_factor)
