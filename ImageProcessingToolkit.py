@@ -86,7 +86,7 @@ def border(filename, color, border_width):
                 new_image.setPixel(row,col,red,green,blue)  # set to original color
 
 
-                
+
 
     # save and display new image
     if (SHOULD_DISPLAY_IMAGE):
@@ -95,31 +95,30 @@ def border(filename, color, border_width):
         canvas.drawImage(new_image)
     new_image.save("output/border-"+filename)
 
-
 ##  Problem 2
 # Add a function to the image processing toolkit that reduces an image by half,
 # discarding every second pixel.
 
 def half(filename):
-    originalImage = GraphicsImage(filename)
-    originalWidth = originalImage.width()
-    originalHeight = originalImage.height()
+    original_image = GraphicsImage(filename)
+    original_width = original_image.width()
+    original_height = original_image.height()
 
-    newWidth = originalImage.width()//2
-    newHeight = originalImage.height()//2
-    newImage = GraphicsImage(newWidth,newHeight)
+    new_width = original_image.width()//2
+    new_height = original_image.height()//2
+    new_image = GraphicsImage(new_width,new_height)
 
-    for row in range (0,originalHeight,2):
-        for col in range (0,originalWidth,2):
-            red = originalImage.getRed(row,col)
-            green = originalImage.getGreen(row,col)
-            blue = originalImage.getBlue(row,col)
-            newImage.setPixel(row//2,col//2,red,green,blue)
+    for row in range (0,original_height,2):
+        for col in range (0,original_width,2):
+            red = original_image.getRed(row,col)
+            green = original_image.getGreen(row,col)
+            blue = original_image.getBlue(row,col)
+            new_image.setPixel(row//2,col//2,red,green,blue)
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
-        canvas.drawImage(newImage)
-    newImage.save("output/half-"+filename)
+        canvas.drawImage(new_image)
+    new_image.save("output/half-"+filename)
 
 ##  Problem 3
 # Add a function to the image processing toolkit that doubles an image in
@@ -163,50 +162,51 @@ def double(filename):
 # copies of an image below each other.
 
 def sideClone(filename):
-    originalImage = GraphicsImage(filename)
-    originalWidth = originalImage.width()
-    originalHeight = originalImage.height()
+    original_image = GraphicsImage(filename)
+    original_width = original_image.width()
+    original_height = original_image.height()
 
-    newWidth = originalImage.width() * 2
-    newHeight = originalImage.height()
-    newImage = GraphicsImage(newWidth,newHeight)
+    new_width = original_image.width() * 2
+    new_height = original_image.height()
+    new_image = GraphicsImage(new_width,new_height)
 
-    for row in range (0,originalHeight):
-        for col in range (0,originalWidth):
-            red = originalImage.getRed(row,col)
-            green = originalImage.getGreen(row,col)
-            blue = originalImage.getBlue(row,col)
-            newImage.setPixel(row,col,red,green,blue)
-            newImage.setPixel(row,col+originalWidth,red,green,blue)
+    for row in range (0,original_height):
+        for col in range (0,original_width):
+            red = original_image.getRed(row,col)
+            green = original_image.getGreen(row,col)
+            blue = original_image.getBlue(row,col)
+            new_image.setPixel(row,col,red,green,blue)
+            new_image.setPixel(row,col+original_width,red,green,blue)
 
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
-        canvas.drawImage(newImage)
-    newImage.save("output/side-clone-"+filename)
+        canvas.drawImage(new_image)
+    new_image.save("output/side-clone-"+filename)
 
 def downClone(filename):
-    originalImage = GraphicsImage(filename)
-    originalWidth = originalImage.width()
-    originalHeight = originalImage.height()
+    original_image = GraphicsImage(filename)
+    original_width = original_image.width()
+    original_height = original_image.height()
 
-    newWidth = originalImage.width()
-    newHeight = originalImage.height() * 2
-    newImage = GraphicsImage(newWidth,newHeight)
+    new_width = original_image.width()
+    new_height = original_image.height() * 2
+    new_image = GraphicsImage(new_width,new_height)
 
-    for row in range (0,originalHeight):
-        for col in range (0,originalWidth):
-            red = originalImage.getRed(row,col)
-            green = originalImage.getGreen(row,col)
-            blue = originalImage.getBlue(row,col)
-            newImage.setPixel(row,col,red,green,blue)
-            newImage.setPixel(row+originalHeight,col,red,green,blue)
+    for row in range (0,original_height):
+        for col in range (0,original_width):
+            red = original_image.getRed(row,col)
+            green = original_image.getGreen(row,col)
+            blue = original_image.getBlue(row,col)
+            new_image.setPixel(row,col,red,green,blue)
+            new_image.setPixel(row+original_height,col,red,green,blue)
 
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
-        canvas.drawImage(newImage)
-    newImage.save("output/down-clone"+filename)
+        canvas.drawImage(new_image)
+    new_image.save("output/down-clone-"+filename)
+
 
 ##  Problem 5
 # Add a function to the image processing toolkit that changes an
@@ -300,7 +300,6 @@ def smartBorder(filename, border_width):
         canvas.drawImage(new_image)
     new_image.save("output/smart-border-"+filename)
 
-            
 
 ##  Problem 7
 # Modify the code for problems 2 and 3 to include a scale parameter that
@@ -310,29 +309,29 @@ def smartBorder(filename, border_width):
 # for off-numbers, such as 2.3.
 
 def scale(filename, scale):
-    originalImage = GraphicsImage(filename)
-    originalWidth = originalImage.width()
-    originalHeight = originalImage.height()
+    original_image = GraphicsImage(filename)
+    original_width = original_image.width()
+    original_height = original_image.height()
 
-    newWidth = int(originalImage.width() * scale)
-    newHeight = int(originalImage.height() * scale)
-    newImage = GraphicsImage(newWidth,newHeight)
+    new_width = int(original_image.width() * scale)
+    new_height = int(original_image.height() * scale)
+    new_image = GraphicsImage(new_width,new_height)
 
-    for row in range(0, newHeight):
-        for col in range(0, newWidth):
+    for row in range(0, new_height):
+        for col in range(0, new_width):
             orig_row = int(row//scale)
             orig_col = int(col//scale)
 
-            red = originalImage.getRed(orig_row,orig_col)
-            green = originalImage.getGreen(orig_row,orig_col)
-            blue = originalImage.getBlue(orig_row,orig_col)
-            newImage.setPixel(row,col,red,green,blue)
+            red = original_image.getRed(orig_row,orig_col)
+            green = original_image.getGreen(orig_row,orig_col)
+            blue = original_image.getBlue(orig_row,orig_col)
+            new_image.setPixel(row,col,red,green,blue)
 
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
-        canvas.drawImage(newImage)
-    newImage.save("output/scale"+str(scale)+"x-" + filename)
+        canvas.drawImage(new_image)
+    new_image.save("output/scale"+str(scale)+"x-" + filename)
 
 ##  Problem 8
 # Modify the code for problem 4 to accept horizontal and vertical
@@ -344,29 +343,29 @@ def smartClone(filename, side, down):
     if not type(side) == int or not type(down) == int:
         print("Side and down need to be integers.")
 
-    originalImage = GraphicsImage(filename)
-    originalWidth = originalImage.width()
-    originalHeight = originalImage.height()
+    original_image = GraphicsImage(filename)
+    original_width = original_image.width()
+    original_height = original_image.height()
 
-    newWidth = originalImage.width() * side
-    newHeight = originalImage.height() * down
-    newImage = GraphicsImage(newWidth,newHeight)
+    new_width = original_image.width() * side
+    new_height = original_image.height() * down
+    new_image = GraphicsImage(new_width,new_height)
 
-    for row in range (0,originalHeight):
-        for col in range (0,originalWidth):
-            red = originalImage.getRed(row,col)
-            green = originalImage.getGreen(row,col)
-            blue = originalImage.getBlue(row,col)
+    for row in range (0,original_height):
+        for col in range (0,original_width):
+            red = original_image.getRed(row,col)
+            green = original_image.getGreen(row,col)
+            blue = original_image.getBlue(row,col)
             for img_row in range (0, down):
-                newImage.setPixel(row+img_row*originalHeight,col,red,green,blue)
+                new_image.setPixel(row+img_row*original_height,col,red,green,blue)
             for img_col in range(0, side):
-                newImage.setPixel(row,col+img_col*originalWidth,red,green,blue)
-            
+                new_image.setPixel(row,col+img_col*original_width,red,green,blue)
+
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
-        canvas.drawImage(newImage)
-    newImage.save("output/smart-clone"+filename)
+        canvas.drawImage(new_image)
+    new_image.save("output/smart-clone"+filename)
     
 
 ##  Problem 9
@@ -380,26 +379,27 @@ def smartClone(filename, side, down):
 # stretch, blur, mosaic, 8-bit, etc...
 
 def stretch(filename, x, y):
-    originalImage = GraphicsImage(filename)
-    originalWidth = originalImage.width()
-    originalHeight = originalImage.height()
+    original_image = GraphicsImage(filename)
+    original_width = original_image.width()
+    original_height = original_image.height()
 
-    newWidth = int(originalImage.width() * x)
-    newHeight = int(originalImage.height() * y)
-    newImage = GraphicsImage(newWidth,newHeight)
+    new_width = int(original_image.width() * x)
+    new_height = int(original_image.height() * y)
+    new_image = GraphicsImage(new_width,new_height)
 
-    for row in range (0,newHeight):
-        for col in range (0,newWidth):
+    for row in range (0,new_height):
+        for col in range (0,new_width):
             orig_row = int(row//y)
             orig_col = int(col//x)
 
-            red = originalImage.getRed(orig_row,orig_col)
-            green = originalImage.getGreen(orig_row,orig_col)
-            blue = originalImage.getBlue(orig_row,orig_col)
-            newImage.setPixel(row,col,red,green,blue) # a value of 1 is default image
+            red = original_image.getRed(orig_row,orig_col)
+            green = original_image.getGreen(orig_row,orig_col)
+            blue = original_image.getBlue(orig_row,orig_col)
+            new_image.setPixel(row,col,red,green,blue) # a value of 1 is default image
 
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
-        canvas.drawImage(newImage)
-    newImage.save("output/stretch-"+filename)
+        canvas.drawImage(new_image)
+    new_image.save("output/stretch-"+filename)
+

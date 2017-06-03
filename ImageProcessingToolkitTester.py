@@ -43,7 +43,6 @@ double("totoro.gif")
 sideClone("arrow.gif")
 sideClone("jellyfish.gif")
 sideClone("totoro.gif")
-
 downClone("arrow.gif")
 downClone("jellyfish.gif")
 downClone("totoro.gif")
@@ -54,7 +53,7 @@ greyscale("totoro.gif")
 # 6
 smartBorder("arrow.gif",10)
 smartBorder("jellyfish.gif",100)
-smartBorder("totoro.gif",10)
+smartBorder("totoro.gif",100)
 # 7
 scale_factor = float(input("SCALE FACTOR:"))
 scale("arrow.gif", scale_factor)
@@ -63,8 +62,9 @@ scale("totoro.gif", scale_factor)
 # 8
 smartClone("arrow.gif",3,2)
 smartClone("jellyfish.gif",3,2)
-smartClone("totoro.gif",4,2)
+smartClone("totoro.gif",3,2)
 # 10
 stretch("arrow.gif",math.pi,1)
-stretch("jellyfish.gif",0.5,1)
-stretch("totoro.gif",0.5,3)
+stretch("jellyfish.gif", 0.5,1)
+stretch("totoro.gif",0.5,0.75)
+
