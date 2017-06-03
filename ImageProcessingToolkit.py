@@ -20,7 +20,7 @@
 from graphics import GraphicsImage, GraphicsWindow
 from ColorUtils import *
 
-SHOULD_DISPLAY_IMAGE = False
+SHOULD_DISPLAY_IMAGE = True
 
 ##  Template
 # Use this function as a template for solving the problems below.
@@ -46,7 +46,7 @@ def template(filename):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(image)
-    image.save("template-"+filename)
+    image.save("output/template-"+filename)
 
 ##  Problem 1
 # Add a function to the image processing toolkit that puts a border
@@ -82,7 +82,7 @@ def border(filename, color, border_width):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(image)
-    image.save("border-"+filename)
+    image.save("output/border-"+filename)
 
 ##  Problem 2
 # Add a function to the image processing toolkit that reduces an image by half,
@@ -97,17 +97,17 @@ def half(filename):
     newHeight = originalImage.height()//2
     newImage = GraphicsImage(newWidth,newHeight)
 
-    for x in range (0,originalHeight,2):
-        for y in range (0,originalWidth,2):
-            red = originalImage.getRed(x,y)
-            green = originalImage.getGreen(x,y)
-            blue = originalImage.getBlue(x,y)
-            newImage.setPixel(x//2,y//2,red,green,blue)
+    for row in range (0,originalHeight,2):
+        for col in range (0,originalWidth,2):
+            red = originalImage.getRed(row,col)
+            green = originalImage.getGreen(row,col)
+            blue = originalImage.getBlue(row,col)
+            newImage.setPixel(row//2,col//2,red,green,blue)
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(newImage)
-    newImage.save("half-"+filename)
+    newImage.save("output/half-"+filename)
 
 ##  Problem 3
 # Add a function to the image processing toolkit that doubles an image in
@@ -143,7 +143,7 @@ def double(filename):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(new_image)
-    new_image.save("double-"+filename)
+    new_image.save("output/double-"+filename)
 
 ##  Problem 4
 # Add a function to the image processing toolkit that places two copies
@@ -171,7 +171,7 @@ def sideClone(filename):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(newImage)
-    newImage.save("side-clone"+filename)
+    newImage.save("output/side-clone-"+filename)
 
 ##  Problem 5
 # Add a function to the image processing toolkit that changes an
@@ -198,7 +198,7 @@ def greyscale(filename):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(image)
-    image.save("greyscale-"+filename)
+    image.save("output/greyscale-"+filename)
 
 ##  Problem 6
 # Modify problem 1 so that the border color is somehow selected based on
@@ -215,6 +215,31 @@ def greyscale(filename):
 # problem 2), whereas a scale factor of 2.0 should double the size (as
 # problem 3).  The tricky part is determining which pixels to replicate
 # for off-numbers, such as 2.3.
+
+def scale(filename, scale):
+    originalImage = GraphicsImage(filename)
+    originalWidth = originalImage.width()
+    originalHeight = originalImage.height()
+
+    newWidth = int(originalImage.width() * scale)
+    newHeight = int(originalImage.height() * scale)
+    newImage = GraphicsImage(newWidth,newHeight)
+
+    for row in range(0, newHeight):
+        for col in range(0, newWidth):
+            orig_row = int(row//scale)
+            orig_col = int(col//scale)
+
+            red = originalImage.getRed(orig_row,orig_col)
+            green = originalImage.getGreen(orig_row,orig_col)
+            blue = originalImage.getBlue(orig_row,orig_col)
+            newImage.setPixel(row,col,red,green,blue)
+
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(newImage)
+    newImage.save("output/scale"+str(scale)+"x-" + filename)
 
 ##  Problem 8
 # Modify the code for problem 4 to accept horizontal and vertical
