@@ -300,7 +300,6 @@ def smartBorder(filename, border_width):
     new_image.save("output/smart-border-"+filename)
 
 
-
 ##  Problem 7
 # Modify the code for problems 2 and 3 to include a scale parameter that
 # applies to the picture.  A scale factor of .5 should halve the size (as
@@ -366,7 +365,6 @@ def smartClone(filename, side, down):
         canvas = win.canvas()
         canvas.drawImage(new_image)
     new_image.save("output/smart-clone-"+filename)
-
 
 ##  Problem 9
 # Modify the code from problem 5 to allow for other photographic print toning,
