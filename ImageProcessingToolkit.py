@@ -16,6 +16,7 @@
 #  educational purposes only.  Any commercial use of this code must       #
 #  receive permission from the author(s).                                 #
 ###########################################################################
+
 from graphics import GraphicsImage, GraphicsWindow
 ##  Template
 # Use this function as a template for solving the problems below.
@@ -30,6 +31,7 @@ def template(filename):
             green = image.getGreen(row,col)
             blue = image.getBlue(row,col)
             # do something to the pixel
+
             if (red > green):   # meaningless comparison
                 image.setPixel(row,col,0,0,0)  # set to black
             else:
@@ -40,27 +42,56 @@ def template(filename):
     canvas.drawImage(image)
     image.save("template-"+filename)
 
-##  Problem 1
-# Add a function to the image processing toolkit that puts a border
-# of a given color around an image.  Parameters:  color, width
-
 ##  Problem 2
 # Add a function to the image processing toolkit that reduces an image by half,
 # discarding every second pixel.
 
-##  Problem 3
-# Add a function to the image processing toolkit that doubles an image in
-# size, replicating each pixel horizontally and vertically.
+def size(filename):
+    originalImage = GraphicsImage(filename)
+    originalWidth = originalImage.width()
+    originalHeight = originalImage.height()
+
+    newWidth = originalImage.width()//2
+    newHeight = originalImage.height()//2
+    newImage = GraphicsImage(newWidth,newHeight)
+
+    for x in range (0,originalHeight,2):
+        for y in range (0,originalWidth,2):
+            red = originalImage.getRed(x,y)
+            green = originalImage.getGreen(x,y)
+            blue = originalImage.getBlue(x,y)
+            newImage.setPixel(x//2,y//2,red,green,blue)
+    newWin = GraphicsWindow()
+    newCanvas = newWin.canvas()
+    newCanvas.drawImage(newImage)
+    newImage.save("size-"+filename)
 
 ##  Problem 4
 # Add a function to the image processing toolkit that places two copies
 # of an image next to each other, and another function that places two
 # copies of an image below each other.
 
-##  Problem 5
-# Add a function to the image processing toolkit that changes an
-# image to grayscale, using a darkness ratio calculated by the following
-# formula:    21.3% red + 71.5% green and 5.2% blue 
+def sideClone(filename):
+    originalImage = GraphicsImage(filename)
+    originalWidth = originalImage.width()
+    originalHeight = originalImage.height()
+
+    newWidth = originalImage.width() * 2
+    newHeight = originalImage.height()
+    newImage = GraphicsImage(newWidth,newHeight)
+
+    for row in range (0,originalHeight):
+        for col in range (0,originalWidth):
+            red = originalImage.getRed(row,col)
+            green = originalImage.getGreen(row,col)
+            blue = originalImage.getBlue(row,col)
+            newImage.setPixel(row,col,red,green,blue)
+            newImage.setPixel(row,col+originalWidth,red,green,blue)
+
+    newWin = GraphicsWindow()
+    newCanvas = newWin.canvas()
+    newCanvas.drawImage(newImage)
+    newImage.save("sideClone"+filename)
 
 ##  Problem 6 
 # Modify problem 1 so that the border color is somehow selected based on 
@@ -68,6 +99,23 @@ def template(filename):
 # average, most common pixel, or a complimentary color not used often.
 # In the documentation, explain your algorithm for selecting the color.
 # It should not be selected randomly.
+
+#def newBorder(filename):
+    
+
+
+##  Problem 1
+# Add a function to the image processing toolkit that puts a border
+# of a given color around an image.  Parameters:  color, width
+
+##  Problem 3
+# Add a function to the image processing toolkit that doubles an image in
+# size, replicating each pixel horizontally and vertically.
+
+##  Problem 5
+# Add a function to the image processing toolkit that changes an
+# image to grayscale, using a darkness ratio calculated by the following
+# formula:    21.3% red + 71.5% green and 5.2% blue 
 
 ##  Problem 7
 # Modify the code for problems 2 and 3 to include a scale parameter that

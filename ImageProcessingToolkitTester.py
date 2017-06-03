@@ -21,5 +21,7 @@
 ###########################################################################
 from ImageProcessingToolkit import *
 
-template("arrow.gif")
+#template("arrow.gif")
 #template("jellyfish.gif")
+#size("arrow.gif")
+sideClone("arrow.gif")
