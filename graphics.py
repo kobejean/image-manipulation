@@ -1276,4 +1276,3 @@ class GraphicsParamError(GraphicsError) :
 # --- Create the root window and initialize the Tk system.
 _rootWin = tk.Tk()
 _rootWin.withdraw()
-

@@ -20,9 +20,22 @@
 #  receive permission from the author(s).                                 #
 ###########################################################################
 from ImageProcessingToolkit import *
+
+template("arrow.gif")
+template("jellyfish.gif")
+
+# 1
 border("arrow.gif", "#FFFF00", 5)
 border("jellyfish.gif", "#FFFF00", 5)
+# 2
+half("arrow.gif")
+half("jellyfish.gif")
+# 3
 double("arrow.gif")
 double("jellyfish.gif")
+# 4
+sideClone("arrow.gif")
+sideClone("jellyfish.gif")
+# 5
 greyscale("arrow.gif")
 greyscale("jellyfish.gif")

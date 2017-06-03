@@ -16,6 +16,7 @@
 #  modify for educational purposes only.  Any commercial use of this code #
 #  must receive permission from the author(s).                            #
 ###########################################################################
+
 from graphics import GraphicsImage, GraphicsWindow
 from ColorUtils import *
 
@@ -34,6 +35,7 @@ def template(filename):
             green = image.getGreen(row,col)
             blue = image.getBlue(row,col)
             # do something to the pixel
+
             if (red > green):   # meaningless comparison
                 image.setPixel(row,col,0,0,0)  # set to black
             else:
@@ -86,6 +88,27 @@ def border(filename, color, border_width):
 # Add a function to the image processing toolkit that reduces an image by half,
 # discarding every second pixel.
 
+def half(filename):
+    originalImage = GraphicsImage(filename)
+    originalWidth = originalImage.width()
+    originalHeight = originalImage.height()
+
+    newWidth = originalImage.width()//2
+    newHeight = originalImage.height()//2
+    newImage = GraphicsImage(newWidth,newHeight)
+
+    for x in range (0,originalHeight,2):
+        for y in range (0,originalWidth,2):
+            red = originalImage.getRed(x,y)
+            green = originalImage.getGreen(x,y)
+            blue = originalImage.getBlue(x,y)
+            newImage.setPixel(x//2,y//2,red,green,blue)
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(newImage)
+    newImage.save("half-"+filename)
+
 ##  Problem 3
 # Add a function to the image processing toolkit that doubles an image in
 # size, replicating each pixel horizontally and vertically.
@@ -120,12 +143,35 @@ def double(filename):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(new_image)
-    new_image.save("size-double-"+filename)
+    new_image.save("double-"+filename)
 
 ##  Problem 4
 # Add a function to the image processing toolkit that places two copies
 # of an image next to each other, and another function that places two
 # copies of an image below each other.
+
+def sideClone(filename):
+    originalImage = GraphicsImage(filename)
+    originalWidth = originalImage.width()
+    originalHeight = originalImage.height()
+
+    newWidth = originalImage.width() * 2
+    newHeight = originalImage.height()
+    newImage = GraphicsImage(newWidth,newHeight)
+
+    for row in range (0,originalHeight):
+        for col in range (0,originalWidth):
+            red = originalImage.getRed(row,col)
+            green = originalImage.getGreen(row,col)
+            blue = originalImage.getBlue(row,col)
+            newImage.setPixel(row,col,red,green,blue)
+            newImage.setPixel(row,col+originalWidth,red,green,blue)
+
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(newImage)
+    newImage.save("side-clone"+filename)
 
 ##  Problem 5
 # Add a function to the image processing toolkit that changes an
@@ -160,6 +206,8 @@ def greyscale(filename):
 # average, most common pixel, or a complimentary color not used often.
 # In the documentation, explain your algorithm for selecting the color.
 # It should not be selected randomly.
+
+#def newBorder(filename):
 
 ##  Problem 7
 # Modify the code for problems 2 and 3 to include a scale parameter that
