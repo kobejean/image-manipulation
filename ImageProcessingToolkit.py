@@ -207,6 +207,7 @@ def downClone(filename):
         canvas.drawImage(new_image)
     new_image.save("output/down-clone-"+filename)
 
+
 ##  Problem 5
 # Add a function to the image processing toolkit that changes an
 # image to grayscale, using a darkness ratio calculated by the following
