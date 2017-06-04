@@ -108,6 +108,7 @@ def half(filename):
         for col in range (0,original_width,2):
             (red, green, blue) = original_image.getPixel(row,col)
             new_image.setPixel(row//2,col//2,red,green,blue)
+
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
@@ -351,6 +352,33 @@ def smartClone(filename, side, down):
         canvas = win.canvas()
         canvas.drawImage(new_image)
     new_image.save("output/smart-clone-"+filename)
+
+
+def tile(filename, side, down):
+    if not type(side) == int or not type(down) == int:
+        print("Side and down need to be integers.")
+
+    original_image = GraphicsImage(filename)
+    original_width = original_image.width()
+    original_height = original_image.height()
+
+    new_width = original_image.width() * side
+    new_height = original_image.height() * down
+    new_image = GraphicsImage(new_width,new_height)
+
+    for row in range (0,original_height):
+        for col in range (0,original_width):
+            (red, green, blue) = original_image.getPixel(row,col)
+
+            for img_row in range (0, down):
+                for img_col in range(0, side):
+                    new_image.setPixel(row+img_row*original_height,col+img_col*original_width,red,green,blue)
+
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(new_image)
+    new_image.save("output/tile-"+filename)
 
 ##  Problem 9
 # Modify the code from problem 5 to allow for other photographic print toning,
