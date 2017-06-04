@@ -277,6 +277,7 @@ def smartBorder(filename, border_width):
                 orig_col = col - border_width
 
                 # get the current pixel
+
                 (red, green, blue) = orig_image.getPixel(orig_row,orig_col)
 
                 new_image.setPixel(row,col,red,green,blue)  # set to original color
