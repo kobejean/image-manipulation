@@ -20,7 +20,7 @@
 from graphics import GraphicsImage, GraphicsWindow
 from ColorUtils import *
 
-SHOULD_DISPLAY_IMAGE = False
+SHOULD_DISPLAY_IMAGE = True
 
 ##  Template
 # Use this function as a template for solving the problems below.
@@ -383,6 +383,62 @@ def colorSubstitution(filename, select_hue, threshhold, result_hue):
         canvas = win.canvas()
         canvas.drawImage(image)
     image.save("output/color-substitution-"+filename)
+
+def contrastBorder(filename, border_width):
+    orig_image = GraphicsImage(filename)
+    orig_width = orig_image.width()
+    orig_height = orig_image.height()
+
+    new_width = orig_width + 2 * border_width
+    new_height = orig_height + 2 * border_width
+    new_image = GraphicsImage(new_width,new_height)
+
+    red = 0
+    blue = 0
+    green = 0
+
+    for row in range(orig_height):
+        for col in range(orig_width):
+            red += orig_image.getRed(row, col)
+            green += orig_image.getGreen(row, col)
+            blue += orig_image.getBlue(row, col)
+
+    avg_red = red // (orig_width * orig_height)
+    avg_green = green // (orig_width * orig_height)
+    avg_blue = blue // (orig_width * orig_height)
+
+    (h,s,v) = rgb_to_hsv(avg_red,avg_green,avg_blue)
+
+    h = (h + 0.5) % 1.0
+
+    (r,g,b) = hsv_to_rgb(h,s,v)
+
+    for row in range(0, new_height):
+        for col in range(0, new_width):
+
+            # set booleans for conditions
+            isTopBorder = row < border_width
+            isBottomBorder = row >= new_height - border_width
+            isLeftBorder = col < border_width
+            isRightBorder = col >= new_width - border_width
+
+            if (isTopBorder or isBottomBorder or isLeftBorder or isRightBorder):
+                new_image.setPixel(row,col,r,g,b)  # set to border color
+            else:
+                orig_row = row - border_width
+                orig_col = col - border_width
+
+                # get the current pixel
+                (red, green, blue) = orig_image.getPixel(orig_row,orig_col)
+
+                new_image.setPixel(row,col,red,green,blue)  # set to original color
+
+    # save and display new image
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(new_image)
+    new_image.save("output/smart-border-"+filename)
 
 ##  Problem 10
 # Create a photo manipulation effect of your own design.  Ideas can include
