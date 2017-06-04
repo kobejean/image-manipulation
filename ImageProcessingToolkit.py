@@ -276,10 +276,7 @@ def smartBorder(filename, border_width):
                 orig_col = col - border_width
 
                 # get the current pixel
-                (red, green, blue) = image.getPixel(row,col)
-                red = orig_image.getRed(orig_row,orig_col)
-                green = orig_image.getGreen(orig_row,orig_col)
-                blue = orig_image.getBlue(orig_row,orig_col)
+                (red, green, blue) = new_image.getPixel(row,col)
 
                 new_image.setPixel(row,col,red,green,blue)  # set to original color
 
@@ -438,7 +435,7 @@ def contrastBorder(filename, border_width):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(new_image)
-    new_image.save("output/smart-border-"+filename)
+    new_image.save("output/contrast-border-"+filename)
 
 ##  Problem 10
 # Create a photo manipulation effect of your own design.  Ideas can include
