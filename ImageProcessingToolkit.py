@@ -438,7 +438,7 @@ def contrastBorder(filename, border_width):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(new_image)
-    new_image.save("output/smart-border-"+filename)
+    new_image.save("output/contrast-border-"+filename)
 
 ##  Problem 10
 # Create a photo manipulation effect of your own design.  Ideas can include
