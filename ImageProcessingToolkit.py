@@ -11,7 +11,7 @@
 #       template    --  Contains the basic structure for solutions        #
 #       <describe others>                                                 #
 #                                                                         #
-#  This program is copyright (c) 2017 Jean Flaherty, Griffin Myers        #
+#  This program is copyright (c) 2017 Jean Flaherty, Griffin Myers,       #
 #  and Dean Zeller. All rights reserved.  Permission granted to use and   #
 #  modify for educational purposes only.  Any commercial use of this code #
 #  must receive permission from the author(s).                            #
@@ -372,6 +372,58 @@ def smartClone(filename, side, down):
 # such as alternate-ratio greyscale, pure black-and-white (with threshold
 # parameters), sepia toning, hot-tone (reds), cold-tone (blues), negative,
 # color substitution, or other color-related ideas.
+
+def smartBorder(filename, border_width):
+    orig_image = GraphicsImage(filename)
+    orig_width = orig_image.width()
+    orig_height = orig_image.height()
+
+    new_width = orig_width + 2 * border_width
+    new_height = orig_height + 2 * border_width
+    new_image = GraphicsImage(new_width,new_height)
+
+    red = 0
+    blue = 0
+    green = 0
+
+    for row in range(orig_height):
+        for col in range(orig_width):
+            red += orig_image.getRed(row, col)
+            green += orig_image.getGreen(row, col)
+            blue += orig_image.getBlue(row, col)
+
+    avg_red = red // (orig_width * orig_height)
+    avg_green = green // (orig_width * orig_height)
+    avg_blue = blue // (orig_width * orig_height)
+
+    for row in range(0, new_height):
+        for col in range(0, new_width):
+
+            # set booleans for conditions
+            isTopBorder = row < border_width
+            isBottomBorder = row >= new_height - border_width
+            isLeftBorder = col < border_width
+            isRightBorder = col >= new_width - border_width
+
+            if (isTopBorder or isBottomBorder or isLeftBorder or isRightBorder):
+                new_image.setPixel(row,col,avg_red,avg_green,avg_blue)  # set to border color
+            else:
+                orig_row = row - border_width
+                orig_col = col - border_width
+
+                # get the current pixel
+                red = orig_image.getRed(orig_row,orig_col)
+                green = orig_image.getGreen(orig_row,orig_col)
+                blue = orig_image.getBlue(orig_row,orig_col)
+
+                new_image.setPixel(row,col,red,green,blue)  # set to original color
+
+    # save and display new image
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(new_image)
+    new_image.save("output/smart-border-"+filename)
 
 ##  Problem 10
 # Create a photo manipulation effect of your own design.  Ideas can include

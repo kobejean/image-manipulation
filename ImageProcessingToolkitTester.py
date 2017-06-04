@@ -14,7 +14,7 @@
 #       template    --  Contains the basic structure for solutions        #
 #       <describe others>                                                 #
 #                                                                         #
-#  This program is copyright (c) 2017 Jean Flaherty, Griffin Myers        #
+#  This program is copyright (c) 2017 Jean Flaherty, Griffin Myers,       #
 #  and Dean Zeller.                                                       #
 #  All rights reserved.  Permission granted to use and modify for         #
 #  educational purposes only.  Any commercial use of this code must       #
