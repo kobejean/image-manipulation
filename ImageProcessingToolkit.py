@@ -20,7 +20,7 @@
 from graphics import GraphicsImage, GraphicsWindow
 from ColorUtils import *
 
-SHOULD_DISPLAY_IMAGE = True
+SHOULD_DISPLAY_IMAGE = False
 
 ##  Template
 # Use this function as a template for solving the problems below.
@@ -31,9 +31,7 @@ def template(filename):
     for row in range(height):
         for col in range(width):
             # get the current pixel
-            red = image.getRed(row,col)
-            green = image.getGreen(row,col)
-            blue = image.getBlue(row,col)
+            (red, green, blue) = image.getPixel(row,col)
             # do something to the pixel
 
             if (red > green):   # meaningless comparison
@@ -79,9 +77,7 @@ def border(filename, color, border_width):
                 orig_col = col - border_width
 
                 # get the current pixel
-                red = orig_image.getRed(orig_row,orig_col)
-                green = orig_image.getGreen(orig_row,orig_col)
-                blue = orig_image.getBlue(orig_row,orig_col)
+                (red, green, blue) = orig_image.getPixel(orig_row,orig_col)
 
                 new_image.setPixel(row,col,red,green,blue)  # set to original color
 
@@ -110,9 +106,7 @@ def half(filename):
 
     for row in range (0,original_height,2):
         for col in range (0,original_width,2):
-            red = original_image.getRed(row,col)
-            green = original_image.getGreen(row,col)
-            blue = original_image.getBlue(row,col)
+            (red, green, blue) = original_image.getPixel(row,col)
             new_image.setPixel(row//2,col//2,red,green,blue)
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
@@ -139,9 +133,7 @@ def double(filename):
             orig_col = col//2
 
             # get the current pixel
-            red = image.getRed(orig_row,orig_col)
-            green = image.getGreen(orig_row,orig_col)
-            blue = image.getBlue(orig_row,orig_col)
+            (red, green, blue) = image.getPixel(orig_row,orig_col)
 
             # set representative pixels
             new_image.setPixel(row,col,red,green,blue)      # set top left pixel
@@ -172,9 +164,7 @@ def sideClone(filename):
 
     for row in range (0,original_height):
         for col in range (0,original_width):
-            red = original_image.getRed(row,col)
-            green = original_image.getGreen(row,col)
-            blue = original_image.getBlue(row,col)
+            (red, green, blue) = original_image.getPixel(row,col)
             new_image.setPixel(row,col,red,green,blue)
             new_image.setPixel(row,col+original_width,red,green,blue)
 
@@ -195,6 +185,7 @@ def downClone(filename):
 
     for row in range (0,original_height):
         for col in range (0,original_width):
+            (red, green, blue) = original_image.getPixel(row,col)
             red = original_image.getRed(row,col)
             green = original_image.getGreen(row,col)
             blue = original_image.getBlue(row,col)
@@ -220,9 +211,7 @@ def greyscale(filename):
     for row in range(height):
         for col in range(width):
             # get the current pixel
-            red = image.getRed(row,col)
-            green = image.getGreen(row,col)
-            blue = image.getBlue(row,col)
+            (red, green, blue) = image.getPixel(row,col)
 
             grey = int(red * 0.213 + green * 0.715 + blue * 0.052)
 
@@ -287,6 +276,7 @@ def smartBorder(filename, border_width):
                 orig_col = col - border_width
 
                 # get the current pixel
+                (red, green, blue) = image.getPixel(row,col)
                 red = orig_image.getRed(orig_row,orig_col)
                 green = orig_image.getGreen(orig_row,orig_col)
                 blue = orig_image.getBlue(orig_row,orig_col)
@@ -322,9 +312,8 @@ def scale(filename, scale):
             orig_row = int(row//scale)
             orig_col = int(col//scale)
 
-            red = original_image.getRed(orig_row,orig_col)
-            green = original_image.getGreen(orig_row,orig_col)
-            blue = original_image.getBlue(orig_row,orig_col)
+
+            (red, green, blue) = original_image.getPixel(orig_row,orig_col)
             new_image.setPixel(row,col,red,green,blue)
 
     if (SHOULD_DISPLAY_IMAGE):
@@ -353,9 +342,8 @@ def smartClone(filename, side, down):
 
     for row in range (0,original_height):
         for col in range (0,original_width):
-            red = original_image.getRed(row,col)
-            green = original_image.getGreen(row,col)
-            blue = original_image.getBlue(row,col)
+            (red, green, blue) = original_image.getPixel(row,col)
+
             for img_row in range (0, down):
                 new_image.setPixel(row+img_row*original_height,col,red,green,blue)
             for img_col in range(0, side):
@@ -372,6 +360,31 @@ def smartClone(filename, side, down):
 # such as alternate-ratio greyscale, pure black-and-white (with threshold
 # parameters), sepia toning, hot-tone (reds), cold-tone (blues), negative,
 # color substitution, or other color-related ideas.
+
+# colorsys.rgb_to_hsv(45,201,18)
+def colorSubstitution(filename, select_hue, threshhold, result_hue):
+    image = GraphicsImage(filename)
+    width = image.width()
+    height = image.height()
+    for row in range(height):
+        for col in range(width):
+            # get the current pixel
+            (r,g,b) = image.getPixel(row,col)
+            (h,s,v) = rgb_to_hsv(r,g,b)
+
+            if select_hue - threshhold <= h and h <= select_hue + threshhold:
+                h = (result_hue + h - select_hue) % 1.0
+                (r,g,b) = hsv_to_rgb(h,s,v)
+
+
+            image.setPixel(row,col,r,g,b)  # set to grey
+
+    # save and display new image
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(image)
+    image.save("output/color-substitution-"+filename)
 
 ##  Problem 10
 # Create a photo manipulation effect of your own design.  Ideas can include
@@ -391,9 +404,7 @@ def stretch(filename, x, y):
             orig_row = int(row//y)
             orig_col = int(col//x)
 
-            red = original_image.getRed(orig_row,orig_col)
-            green = original_image.getGreen(orig_row,orig_col)
-            blue = original_image.getBlue(orig_row,orig_col)
+            (red, green, blue) = original_image.getPixel(orig_row,orig_col)
             new_image.setPixel(row,col,red,green,blue) # a value of 1 is default image
 
     if (SHOULD_DISPLAY_IMAGE):
