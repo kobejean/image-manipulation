@@ -27,43 +27,47 @@ template("arrow.gif")
 template("jellyfish.gif")
 template("totoro.gif")
 
-# 1
+# problem 1
 border("arrow.gif", "#FFFF00", 5)
 border("jellyfish.gif", "#FFFF00", 5)
 border("totoro.gif", "#FF00FF", 5)
-# 2
+# problem 2
 half("arrow.gif")
 half("jellyfish.gif")
 half("totoro.gif")
-# 3
+# problem 3
 double("arrow.gif")
 double("jellyfish.gif")
 double("totoro.gif")
-# 4
+# problem 4
 sideClone("arrow.gif")
 sideClone("jellyfish.gif")
 sideClone("totoro.gif")
 downClone("arrow.gif")
 downClone("jellyfish.gif")
 downClone("totoro.gif")
-# 5
+# problem 5
 greyscale("arrow.gif")
 greyscale("jellyfish.gif")
 greyscale("totoro.gif")
-# 6
+# problem 6
 smartBorder("arrow.gif",10)
 smartBorder("jellyfish.gif",100)
 smartBorder("totoro.gif",100)
-# 7
+# problem 7
 scale_factor = float(input("SCALE FACTOR:"))
 scale("arrow.gif", scale_factor)
 scale("jellyfish.gif", scale_factor)
 scale("totoro.gif", scale_factor)
-# 8
+# problem 8
 smartClone("arrow.gif",3,2)
 smartClone("jellyfish.gif",3,2)
 smartClone("totoro.gif",3,2)
-# 10
+# problem 9
+colorSubstitution("arrow.gif", 0.55, 0.15, 1.0)
+colorSubstitution("jellyfish.gif", 0.5, 0.5, 1.0)
+colorSubstitution("totoro.gif", 0.5, 0.5, 1.0)
+# problem 10
 stretch("arrow.gif",math.pi,1)
 stretch("jellyfish.gif", 0.5,1)
 stretch("totoro.gif",0.5,0.75)
