@@ -533,3 +533,30 @@ def harrisShutter(filename, x, y):
         canvas = win.canvas()
         canvas.drawImage(new_image)
     new_image.save("output/harris-shutter-"+filename)
+
+def harrisShutter2(filename_r, filename_g, filename_b):
+    r_image = GraphicsImage(filename_r)
+    g_image = GraphicsImage(filename_g)
+    b_image = GraphicsImage(filename_b)
+
+    if r_image.height() != g_image.height() or g_image.height() != b_image.height() or r_image.width() != g_image.width() or g_image.width() != b_image.width():
+        print("Error: dimensions must be equal")
+        
+    width = r_image.width()
+    height = r_image.height()
+
+    new_image = GraphicsImage(width, height)
+
+    for row in range(0, height):
+        for col in range(0, width):
+
+            red = r_image.getRed(row, col)
+            green = g_image.getGreen(row, col)
+            blue = b_image.getBlue(row, col)
+            new_image.setPixel(row,col,red,green,blue)
+
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(new_image)
+    new_image.save("output/harris-shutter-"+filename)
