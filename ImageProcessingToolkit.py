@@ -492,3 +492,44 @@ def stretch(filename, x, y):
         canvas = win.canvas()
         canvas.drawImage(new_image)
     new_image.save("output/stretch-"+filename)
+
+## Problem 11
+# Harris Shutter effect
+
+#(red, green, blue)
+
+def harrisShutter(filename, x, y):
+    orig_image = GraphicsImage(filename)
+    orig_width = orig_image.width()
+    orig_height = orig_image.height()
+
+    new_width = int(orig_image.width() + x)
+    new_height = int(orig_image.height() + y)
+    new_image = GraphicsImage(new_width, new_height)
+
+    for row in range(0, new_height):
+        for col in range(0, new_width):
+            orig_row_r = row
+            orig_col_r = col
+
+            orig_row_g = row - y // 2
+            orig_col_g = col - x // 2
+
+            orig_row_b = row - y
+            orig_col_b = col - x
+
+            (red, green, blue) = (0,0,0)
+
+            if orig_col_r in range (orig_width) and orig_row_r in range(orig_height):
+                red = orig_image.getRed(orig_row_r, orig_col_r)
+            if orig_col_g in range (orig_width) and orig_row_g in range(orig_height):
+                green = orig_image.getGreen(orig_row_g, orig_col_g)
+            if orig_col_b in range (orig_width) and orig_row_b in range(orig_height):
+                blue = orig_image.getBlue(orig_row_b, orig_col_b)
+            new_image.setPixel(row,col,red,green,blue)
+
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(new_image)
+    new_image.save("output/harris-shutter-"+filename)
