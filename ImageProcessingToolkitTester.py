@@ -23,55 +23,61 @@
 from ImageProcessingToolkit import *
 import math
 
-# template("arrow.gif")
-# template("jellyfish.gif")
-# template("totoro.gif")
-#
-# # problem 1
-# border("arrow.gif", "#FFFF00", 5)
-# border("jellyfish.gif", "#FFFF00", 5)
-# border("totoro.gif", "#FF00FF", 5)
-# # problem 2
-# half("arrow.gif")
-# half("jellyfish.gif")
-# half("totoro.gif")
-# # problem 3
-# double("arrow.gif")
-# double("jellyfish.gif")
-# double("totoro.gif")
-# # problem 4
-# sideClone("arrow.gif")
-# sideClone("jellyfish.gif")
-# sideClone("totoro.gif")
-# downClone("arrow.gif")
-# downClone("jellyfish.gif")
-# downClone("totoro.gif")
-# # problem 5
-# greyscale("arrow.gif")
-# greyscale("jellyfish.gif")
-# greyscale("totoro.gif")
-# # problem 6
-smartBorder("griffin.gif",30)
-smartBorder("jean.gif",30)
+##template("griffin.gif")
+##template("jean.gif")
+##template("totoro.gif")
+##
+### problem 1
+##border("griffin.gif", "#00FF00", 30)
+##border("jean.gif", "#FF0000", 30)
+##border("totoro.gif", "#0000FF", 100)
+### problem 2
+##half("griffin.gif")
+##half("jean.gif")
+##half("totoro.gif")
+### problem 3
+##double("griffin.gif")
+##double("jean.gif")
+##double("totoro.gif")
+### problem 4
+##sideClone("griffin.gif")
+##sideClone("jean.gif")
+##sideClone("totoro.gif")
+##downClone("griffin.gif")
+##downClone("jean.gif")
+##downClone("totoro.gif")
+### problem 5
+##greyscale("griffin.gif")
+##greyscale("jean.gif")
+##greyscale("totoro.gif")
+### problem 6
+##smartBorder("griffin.gif",30)
+##smartBorder("jean.gif",30)
 ##smartBorder("totoro.gif",100)
-# # problem 7
-# # scale_factor = float(input("SCALE FACTOR:"))
-# scale_factor = 0.25
-# scale("arrow.gif", scale_factor)
-# scale("jellyfish.gif", scale_factor)
-# scale("totoro.gif", scale_factor)
-# # problem 8
-# smartClone("arrow.gif",3,2)
-# smartClone("jellyfish.gif",3,2)
-# smartClone("totoro.gif",3,2)
-# # problem 9
-# colorSubstitution("arrow.gif", 0.55, 0.15, 1.0)
-# colorSubstitution("jellyfish.gif", 0.5, 0.5, 1.0)
-# colorSubstitution("totoro.gif", 0.5, 0.5, 1.0)
-contrastBorder("griffin.gif",30)
-contrastBorder("jean.gif",30)
+### problem 7
+### scale_factor = float(input("SCALE FACTOR:"))
+##scale_factor = 0.25
+##scale("griffin.gif", scale_factor)
+##scale("jean.gif", scale_factor)
+##scale("totoro.gif", scale_factor)
+### problem 8
+##smartClone("griffin.gif",3,2)
+##smartClone("jean.gif",3,2)
+##smartClone("totoro.gif",3,2)
+##tile("griffin.gif",3,2)
+##tile("jean.gif",3,2)
+##tile("totoro.gif",3,2)
+### problem 9
+##colorSubstitution("griffin.gif", 0.55, 0.15, 1.0)
+##colorSubstitution("jean.gif", 0.5, 0.5, 1.0)
+##colorSubstitution("totoro.gif", 0.5, 0.5, 1.0)
+##contrastBorder("griffin.gif",30)
+##contrastBorder("jean.gif",30)
 ##contrastBorder("totoro.gif",100)
-# # problem 10
-# stretch("arrow.gif",math.pi,1)
-# stretch("jellyfish.gif", 0.5,1)
-# stretch("totoro.gif",0.5,0.75)
+### problem 10
+##stretch("griffin.gif",math.pi,1)
+##stretch("jean.gif", 0.5,1)
+##stretch("totoro.gif",0.5,0.75)
+### problem 11
+##harrisShutter("jellyfish.gif",20,0)
+harrisShutter("totoro.gif",50,0)

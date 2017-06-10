@@ -108,6 +108,7 @@ def half(filename):
         for col in range (0,original_width,2):
             (red, green, blue) = original_image.getPixel(row,col)
             new_image.setPixel(row//2,col//2,red,green,blue)
+
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
@@ -353,6 +354,33 @@ def smartClone(filename, side, down):
         canvas.drawImage(new_image)
     new_image.save("output/smart-clone-"+filename)
 
+
+def tile(filename, side, down):
+    if not type(side) == int or not type(down) == int:
+        print("Side and down need to be integers.")
+
+    original_image = GraphicsImage(filename)
+    original_width = original_image.width()
+    original_height = original_image.height()
+
+    new_width = original_image.width() * side
+    new_height = original_image.height() * down
+    new_image = GraphicsImage(new_width,new_height)
+
+    for row in range (0,original_height):
+        for col in range (0,original_width):
+            (red, green, blue) = original_image.getPixel(row,col)
+
+            for img_row in range (0, down):
+                for img_col in range(0, side):
+                    new_image.setPixel(row+img_row*original_height,col+img_col*original_width,red,green,blue)
+
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(new_image)
+    new_image.save("output/tile-"+filename)
+
 ##  Problem 9
 # Modify the code from problem 5 to allow for other photographic print toning,
 # such as alternate-ratio greyscale, pure black-and-white (with threshold
@@ -464,3 +492,71 @@ def stretch(filename, x, y):
         canvas = win.canvas()
         canvas.drawImage(new_image)
     new_image.save("output/stretch-"+filename)
+
+## Problem 11
+# Harris Shutter effect
+
+#(red, green, blue)
+
+def harrisShutter(filename, x, y):
+    orig_image = GraphicsImage(filename)
+    orig_width = orig_image.width()
+    orig_height = orig_image.height()
+
+    new_width = int(orig_image.width() + x)
+    new_height = int(orig_image.height() + y)
+    new_image = GraphicsImage(new_width, new_height)
+
+    for row in range(0, new_height):
+        for col in range(0, new_width):
+            orig_row_r = row
+            orig_col_r = col
+
+            orig_row_g = row - y // 2
+            orig_col_g = col - x // 2
+
+            orig_row_b = row - y
+            orig_col_b = col - x
+
+            (red, green, blue) = (0,0,0)
+
+            if orig_col_r in range (orig_width) and orig_row_r in range(orig_height):
+                red = orig_image.getRed(orig_row_r, orig_col_r)
+            if orig_col_g in range (orig_width) and orig_row_g in range(orig_height):
+                green = orig_image.getGreen(orig_row_g, orig_col_g)
+            if orig_col_b in range (orig_width) and orig_row_b in range(orig_height):
+                blue = orig_image.getBlue(orig_row_b, orig_col_b)
+            new_image.setPixel(row,col,red,green,blue)
+
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(new_image)
+    new_image.save("output/harris-shutter-"+filename)
+
+def harrisShutter2(filename_r, filename_g, filename_b):
+    r_image = GraphicsImage(filename_r)
+    g_image = GraphicsImage(filename_g)
+    b_image = GraphicsImage(filename_b)
+
+    if r_image.height() != g_image.height() or g_image.height() != b_image.height() or r_image.width() != g_image.width() or g_image.width() != b_image.width():
+        print("Error: dimensions must be equal")
+        
+    width = r_image.width()
+    height = r_image.height()
+
+    new_image = GraphicsImage(width, height)
+
+    for row in range(0, height):
+        for col in range(0, width):
+
+            red = r_image.getRed(row, col)
+            green = g_image.getGreen(row, col)
+            blue = b_image.getBlue(row, col)
+            new_image.setPixel(row,col,red,green,blue)
+
+    if (SHOULD_DISPLAY_IMAGE):
+        win = GraphicsWindow()
+        canvas = win.canvas()
+        canvas.drawImage(new_image)
+    new_image.save("output/harris-shutter-"+filename)
