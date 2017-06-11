@@ -14,8 +14,7 @@
 ###########################################################################
 
 from graphics import GraphicsImage, GraphicsWindow
-from ColorUtils import *
-from ImageProcessingToolkit import *
+from color_utils import *
 import glob, os
 
 def thumb(filename, scale):

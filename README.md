@@ -6,6 +6,7 @@
 ![](docs/media/thumb-totoro.gif)
 
 ### Favorites
+![](docs/media/harris-shutter-muybridge.gif)
 ![](docs/media/thumb-greyscale-totoro.gif)
 ![](docs/media/thumb-smart-border-totoro.gif)
 ![](docs/media/thumb-color-substitution-totoro.gif)
@@ -143,4 +144,16 @@ contrastBorder("totoro.gif",100)
 stretch("griffin.gif",math.pi,1)
 stretch("jean.gif", 0.5,1)
 stretch("totoro.gif",0.5,0.75)
+```
+
+### Harris Shutter
+![](docs/media/thumb-harris-shutter-griffin.gif)
+![](docs/media/thumb-harris-shutter-jean.gif)
+![](docs/media/thumb-harris-shutter-jellyfish.gif)
+![](docs/media/thumb-harris-shutter-muybridge.gif)
+```python
+harrisShutter("jean.gif",0,20)
+harrisShutter("griffin.gif",0,20)
+harrisShutter("jellyfish.gif",50,0)
+harrisShutter2("muybridge1.gif", "muybridge2.gif", "muybridge3.gif", 32)
 ```

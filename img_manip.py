@@ -543,7 +543,7 @@ def harrisShutter(filename, x, y, k=4):
         canvas.drawImage(new_image)
     new_image.save("output/harris-shutter-"+filename)
 
-def harrisShutter2(filename_r, filename_g, filename_b):
+def harrisShutter2(filename_r, filename_g, filename_b, k):
     r_image = GraphicsImage("input/"+filename_r)
     g_image = GraphicsImage("input/"+filename_g)
     b_image = GraphicsImage("input/"+filename_b)
@@ -556,16 +556,23 @@ def harrisShutter2(filename_r, filename_g, filename_b):
 
     new_image = GraphicsImage(width, height)
 
+    pixels = []
     for row in range(0, height):
         for col in range(0, width):
 
             red = r_image.getRed(row, col)
             green = g_image.getGreen(row, col)
             blue = b_image.getBlue(row, col)
-            new_image.setPixel(row,col,red,green,blue)
+            # new_image.setPixel(row,col,red,green,blue)
+            pixels.append((red, green, blue))
+
+    for i, (r,g,b) in enumerate(kmeans(pixels,k)):
+        row = i // width
+        col = i % width
+        new_image.setPixel(row,col,r,g,b)
 
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()
         canvas = win.canvas()
         canvas.drawImage(new_image)
-    new_image.save("output/harris-shutter-"+filename)
+    new_image.save("output/harris-shutter-muybridge.gif")
