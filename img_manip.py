@@ -19,6 +19,7 @@
 
 from graphics import GraphicsImage, GraphicsWindow
 from color_utils import *
+from kmeans import kmeans
 
 SHOULD_DISPLAY_IMAGE = False
 
@@ -80,8 +81,6 @@ def border(filename, color, border_width):
                 (red, green, blue) = orig_image.getPixel(orig_row,orig_col)
 
                 new_image.setPixel(row,col,red,green,blue)  # set to original color
-
-
 
 
     # save and display new image
@@ -342,7 +341,6 @@ def smartClone(filename, side, down):
     for row in range (0,original_height):
         for col in range (0,original_width):
             (red, green, blue) = original_image.getPixel(row,col)
-
             for img_row in range (0, down):
                 new_image.setPixel(row+img_row*original_height,col,red,green,blue)
             for img_col in range(0, side):
@@ -499,7 +497,7 @@ def stretch(filename, x, y):
 
 #(red, green, blue)
 
-def harrisShutter(filename, x, y):
+def harrisShutter(filename, x, y, k=4):
     orig_image = GraphicsImage("input/"+filename)
     orig_width = orig_image.width()
     orig_height = orig_image.height()
@@ -507,6 +505,8 @@ def harrisShutter(filename, x, y):
     new_width = int(orig_image.width() + x)
     new_height = int(orig_image.height() + y)
     new_image = GraphicsImage(new_width, new_height)
+
+    pixels = []
 
     for row in range(0, new_height):
         for col in range(0, new_width):
@@ -527,7 +527,15 @@ def harrisShutter(filename, x, y):
                 green = orig_image.getGreen(orig_row_g, orig_col_g)
             if orig_col_b in range (orig_width) and orig_row_b in range(orig_height):
                 blue = orig_image.getBlue(orig_row_b, orig_col_b)
-            new_image.setPixel(row,col,red,green,blue)
+
+            # new_image.setPixel(row,col,int((red//45)*45), int((green//45)*45), int((blue//45)*45))
+            pixels.append((red, green, blue))
+
+
+    for i, (r,g,b) in enumerate(kmeans(pixels,k)):
+        row = i // new_width
+        col = i % new_width
+        new_image.setPixel(row,col,r,g,b)
 
     if (SHOULD_DISPLAY_IMAGE):
         win = GraphicsWindow()

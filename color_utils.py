@@ -1,6 +1,6 @@
 # code from: https://stackoverflow.com/questions/214359/converting-hex-color-to-rgb-and-vice-versa
 
-import colorsys
+import tensorflow as tf
 
 def hex_to_rgb(value):
     """Return (red, green, blue) for the color given as #rrggbb."""

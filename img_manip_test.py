@@ -79,7 +79,7 @@ import math
 # stretch("jean.gif", 0.5,1)
 # stretch("totoro.gif",0.5,0.75)
 # problem 11
-# harrisShutter("jellyfish.gif",0,20)
+harrisShutter("jean.gif",0,20)
 # # harrisShutter("griffin.gif",0,20)
 # # harrisShutter("jean.gif",20,20)
-harrisShutter("totoro.gif",50,0)
+# harrisShutter("totoro.gif",50,0)
