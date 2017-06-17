@@ -61,7 +61,7 @@ import math
 # scale("jean.gif", scale_factor)
 # scale("totoro.gif", scale_factor)
 # # problem 8
-# smartClone("griffin.gif",3,2)
+# smartClone("griffin.gif",3,2.3)
 # smartClone("jean.gif",3,2)
 # smartClone("totoro.gif",3,2)
 # tile("griffin.gif",3,2)
@@ -83,4 +83,4 @@ import math
 # # harrisShutter("griffin.gif",0,20)
 # # harrisShutter("jean.gif",20,20)
 # harrisShutter("totoro.gif",50,0)
-harrisShutter2("muybridge1.gif", "muybridge2.gif", "muybridge3.gif", 32)
+# harrisShutter2("muybridge1.gif", "muybridge2.gif", "muybridge3.gif", 32)

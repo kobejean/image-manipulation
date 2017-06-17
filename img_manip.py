@@ -327,8 +327,7 @@ def scale(filename, scale):
 # two copies tall.
 
 def smartClone(filename, side, down):
-    if not type(side) == int or not type(down) == int:
-        print("Side and down need to be integers.")
+    assert type(side) == int and type(down) == int, "Side and down need to be integers."
 
     original_image = GraphicsImage("input/"+filename)
     original_width = original_image.width()
